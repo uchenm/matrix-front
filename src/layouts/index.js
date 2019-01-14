@@ -3,7 +3,6 @@ import styles from './index.css';
 import Sider from '../components/Sider'
 
 function BasicLayout(props) {
-  console.log('props',props)
   return (
     <div className={`${styles.normal} flex-col`} key='BasicLayout'>
       <Header/>

@@ -4,6 +4,8 @@
  * @Last Modified by: XueYu 😊
  * @Last Modified time: 2019-01-11 21:10:55
  */
+@import '../../global.color.less';
+
 .instrumentSelector {
   background-color: #eee;
 }
@@ -11,6 +13,7 @@
   line-height: initial;
 }
 .content {
+  padding: 2px 5px;
   height: 30px;
   background-color: #fff;
 }
@@ -21,4 +24,42 @@
   &:hover {
     background-color: rgba(82, 179, 112, 0.25);
   }
+}
+.expiries {
+
+}
+.btn {
+  border: 1px solid transparent;
+  padding: 3px 8px;
+}
+.square {
+  border: 1px solid #eee;
+}
+.round {
+  border-radius: 100%;
+}
+.description {
+  font-weight: bolder;
+}
+.priceWidget {
+  background-color: #eee;
+  padding: 0 2px;
+  margin-left: 4px;
+}
+.dot {
+  width: 7px;
+  height: 7px;
+  line-height: 1;
+  display: inline-block;
+  border-radius: 100%;
+  position: relative;
+  top: -0.5px;
+  margin-right: 4px;
+  background-color: #0d0d0d;
+}
+.up {
+  color: @up-red;
+}
+.down {
+  color: @down-green;
 }

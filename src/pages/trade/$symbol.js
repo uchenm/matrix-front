@@ -1,5 +1,5 @@
 import React from 'react'
-// import TradeChartWraper from '../../components/TradeChartWraper'
+import TradeGridLayout from '../../components/TradeGridLayout'
 import InstrumentSelector from '../../components/InstrumentSelector'
 import styles from './index.less'
 
@@ -8,7 +8,7 @@ const TradeChart = () => {
     <div id={styles.tradeChart} className='flex-1 flex-col'>
       <InstrumentSelector/>
       <div className={`${styles.content}`}>
-
+        <TradeGridLayout/>
       </div>
     </div>
   )
