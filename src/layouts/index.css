@@ -1,0 +1,9 @@
+
+.normal {
+  font-family: sans-serif;
+  height: 100%;
+}
+.content {
+  padding: 0 10px 0;
+  margin-top: 5px;
+}
