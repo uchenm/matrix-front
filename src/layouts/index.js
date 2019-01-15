@@ -4,7 +4,7 @@ import Sider from '../components/Sider'
 
 function BasicLayout(props) {
   return (
-    <div className={`${styles.normal} flex-col`} key='BasicLayout'>
+    <div className={`${styles.basicLayout} flex-1 flex-col`} key='BasicLayout'>
       <Header/>
       <div className={`flex flex-1`}>
         <Sider/>
