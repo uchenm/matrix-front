@@ -2,11 +2,12 @@
  * @Author: XueYu 😊
  * @Date: 2019-01-14 17:41:19
  * @Last Modified by: XueYu 😊
- * @Last Modified time: 2019-01-15 20:09:27
+ * @Last Modified time: 2019-01-16 19:00:08
  */
 import React, { PureComponent } from 'react'
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import Card from '../Card'
+import Order from './Order'
 // import styles from './index.less'
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
@@ -19,7 +20,7 @@ const originalLayouts = getFromLS("layouts") || {
     {"w":2,"h":1,"x":8,"y":0,"i":"tabtable","minW":2,"minH":1,"moved":false,"static":false}
   ],
   "md":[
-    {"w":4,"h":4,"x":0,"y":0,"i":"order","minW":2,"minH":1,"moved":false,"static":false},
+    {"w":5,"h":4,"x":0,"y":0,"i":"order","minW":5,"minH":1,"moved":false,"static":false},
     {"w":5,"h":3,"x":4,"y":0,"i":"tv","minW":2,"minH":1,"moved":false,"static":false},
     {"w":5,"h":1,"x":4,"y":3,"i":"deep","minW":2,"minH":1,"moved":false,"static":false},
     {"w":3,"h":4,"x":9,"y":0,"i":"recent","minW":2,"minH":1,"moved":false,"static":false},
@@ -59,7 +60,7 @@ const renderCardList = (isFullscreen, clickFullScreen, clickClose) => {
         extra={['setting', 'close', 'fullscreen']}
         clickFullScreen={() => clickFullScreen('order')}
         clickClose={() => clickClose('order')}>
-        委托交易
+        <Order/>
       </Card>
     ),
     tv: (
@@ -178,6 +179,7 @@ class TradeGridLayout extends PureComponent {
           breakpoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
           cols={{lg: 12, md: 12, sm: 6, xs: 4, xxs: 2}}
           layouts={this.state.layouts}
+          draggableCancel='.ant-card-body'
           onLayoutChange={(layout, layouts) =>
             this.onLayoutChange(layout, layouts)
           }>

@@ -2,38 +2,51 @@
  * @Author: XueYu 😊
  * @Date: 2019-01-15 11:03:08
  * @Last Modified by: XueYu 😊
- * @Last Modified time: 2019-01-15 18:23:13
+ * @Last Modified time: 2019-01-16 19:32:58
  */
+import React, { PureComponent } from 'react'
 import { Card, Icon, Popover, InputNumber, Tooltip, Radio, Checkbox } from 'antd'
+import { connect } from 'dva'
 import styles from './index.less'
 
 const RadioGroup = Radio.Group
 
-const settingContent = (
-  <div className={styles.settingContent}>
-    <Tooltip title='将委托根据价格区间组合，更清楚地显示深度。'>
-      <span className={`${styles.settingContentTitle} f-bolder`}>合并</span>
-    </Tooltip>
-    <div style={{margin: '5px 0 10px 0'}}><InputNumber min={0.5} max={5000} defaultValue={0.5}/></div>
-    <Tooltip title='转换委托列表样式'>
-      <span className={`${styles.settingContentTitle} f-bolder`}>列</span>
-    </Tooltip>
-    <div>
-      <RadioGroup defaultValue={1}>
-        <Radio value={1}>单列</Radio>
-        <Radio value={2}>双列</Radio>
-      </RadioGroup>
-    </div>
-    <br/>
-    <Checkbox>
-      <Tooltip title='当强平委托进入列表是显示警报'>
-        <span className={`${styles.settingContentTitle} f-bolder`}>强平警报</span>
-      </Tooltip>
-    </Checkbox>
-  </div>
-)
+@connect(({trade: {tradeOrderDisplay}}) => ({tradeOrderDisplay}))
+class SettingContent extends PureComponent {
+  onRadioChange = e => {
+    this.props.dispatch({
+      type: 'trade/changeTradeOrderDisplay',
+      payload: {tradeOrderDisplay: e.target.value}
+    })
+  }
+  render(){
+    return (
+      <div className={styles.settingContent}>
+        <Tooltip title='将委托根据价格区间组合，更清楚地显示深度。'>
+          <span className={`${styles.settingContentTitle} f-bolder`}>合并</span>
+        </Tooltip>
+        <div style={{margin: '5px 0 10px 0'}}><InputNumber min={0.5} max={5000} defaultValue={0.5}/></div>
+        <Tooltip title='转换委托列表样式'>
+          <span className={`${styles.settingContentTitle} f-bolder`}>列</span>
+        </Tooltip>
+        <div>
+          <RadioGroup defaultValue='single' value={this.props.tradeOrderDisplay} onChange={this.onRadioChange}>
+            <Radio value='single'>单列</Radio>
+            <Radio value='double'>双列</Radio>
+          </RadioGroup>
+        </div>
+        <br/>
+        <Checkbox>
+          <Tooltip title='当强平委托进入列表是显示警报'>
+            <span className={`${styles.settingContentTitle} f-bolder`}>强平警报</span>
+          </Tooltip>
+        </Checkbox>
+      </div>
+    )
+  }
+}
 const setting = (
-  <Popover placement="bottomRight" key='settingPop' title={'委托列表选项'} arrowPointAtCenter content={settingContent} trigger="click">
+  <Popover placement="bottomRight" key='settingPop' title={'委托列表选项'} arrowPointAtCenter content={<SettingContent/>} trigger="click">
     <Icon type="setting" key='setting' className={`${styles.cardWiget} cursor-p`}/>
   </Popover>
 )

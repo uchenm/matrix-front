@@ -1,0 +1,144 @@
+/*
+ * @Author: XueYu 😊
+ * @Date: 2019-01-16 09:49:31
+ * @Last Modified by: XueYu 😊
+ * @Last Modified time: 2019-01-16 19:16:53
+ */
+ @import '../../../global.color.less';
+
+.order {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.tableWrapper {
+  flex: 1;
+}
+.orderTable {
+  max-width: 100%;
+  width: 100%;
+  // height: 100%;
+  border: 1px solid #bbb;
+  border-collapse: collapse;
+  text-align: right;
+  table-layout: fixed;
+  overflow: hidden;
+  border-spacing: 0;
+  font-size: 12px;
+  th {
+    white-space: nowrap;
+    width: 33.3333333333%;
+    padding-right: 5px;
+  }
+  // tbody>tr:nth-child(odd)>td
+  tbody {
+    tr {
+      &:nth-child(odd) {
+        td {
+          background-color: rgba(195,195,195,0.25);
+        }
+      }
+      &:hover {
+        td {
+          background: transparent;
+          box-shadow: 0 4px 2px -3px rgba(0,0,0,0.5) inset;
+          &:first-child {
+            box-shadow: 4px 4px 2px -3px rgba(0,0,0,0.5) inset;
+          }
+        }
+      }
+    }
+    td {
+      height: 20px;
+      padding-right: 10px;
+    }
+  }
+}
+
+.red {
+  background-color: rgba(232, 112, 79, .2) !important;
+}
+.green {
+  background-color: rgba(82, 179, 112, .2) !important;
+}
+.tRed {
+  color: @up-red;
+}
+.tGreen {
+  color: @down-green;
+}
+
+.total {
+  position: relative;
+}
+
+
+.redTable {
+  composes: orderTable;
+  tr {
+    &:hover {
+      background-color: rgba(232,112,79,0.4);
+    }
+  }
+  .price {
+    position: relative;
+    color: @up-red;
+  }
+  .depthBar {
+    // composes: green;
+    height: 19px;
+    position: absolute;
+    top: 2px;
+    background-color: rgba(232, 112, 79, .2) !important;
+  }
+}
+.greenTable {
+  composes: orderTable;
+  tr {
+    &:hover {
+      background-color: rgba(82,179,112,0.3);
+    }
+  }
+  .price {
+    position: relative;
+    color: @down-green;
+  }
+  .depthBar {
+    // composes: green;
+    height: 19px;
+    position: absolute;
+    top: 2px;
+    background-color: rgba(82, 179, 112, .2) !important;
+  }
+}
+
+.lastPriceWidget {
+  text-align: center;
+  margin-bottom: 5px;
+}
+.doubleLastPriceWidget {
+  text-align: center;
+  background-color: rgba(195,195,195,0.25);
+  border: 1px solid #bbb;
+  .priceWidget {
+    border-right: 1px solid #bbb;
+  }
+}
+.priceWidget {
+  font-weight: bolder;
+  font-size: 20px;
+}
+.indicativeSettlePrice {
+  color: rgba(0,0,0,0.4);
+}
+.positionDeleverageIndicator {
+  display: inline-block;
+}
+.leverageLight {
+  display: inline-block;
+  height: 11px;
+  width: 6px;
+  border: 1px solid rgba(136,136,136,0.5);
+  margin-right: 3px;
+}

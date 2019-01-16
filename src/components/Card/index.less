@@ -2,7 +2,7 @@
  * @Author: XueYu 😊
  * @Date: 2019-01-15 13:50:30
  * @Last Modified by: XueYu 😊
- * @Last Modified time: 2019-01-15 16:11:27
+ * @Last Modified time: 2019-01-16 15:20:45
  */
 .cardWiget {
   margin-right: 5px;
@@ -20,6 +20,8 @@
 /* antd */
 :global(.ant-card){
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 :global(.ant-card-head){
   cursor: move;
@@ -41,7 +43,7 @@
 }
 :global(.ant-card-body){
   padding: 5px;
-  height: 100%;
+  overflow: auto;
 }
 :global(.ant-tooltip){
   max-width: max-content;
