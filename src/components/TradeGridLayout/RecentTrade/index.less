@@ -1,0 +1,40 @@
+@import '../../../global.color.less';
+
+.recentTrade {
+  // height: 100%;
+  overflow: auto;
+  font-size: 12px;
+  border: 1px solid #bbb;
+  border-left: none;
+}
+.tradeItem {
+  height: 18px;
+  text-align: right;
+  background-color: #fff;
+  &:nth-child(odd) {
+    background-color: rgba(195,195,195,0.25);
+  }
+  &:hover {
+    box-shadow: 0 4px 2px -3px rgba(0,0,0,0.5) inset;
+    background-color: rgba(62,134,84,0.15);
+    .itemCol {
+      background: transparent;
+      box-shadow: 0 4px 2px -3px rgba(0,0,0,0.5) inset;
+    }
+  }
+}
+.itemCol {
+  padding-right: 5px;
+  border-left: 1px solid #bbb;
+}
+.side {
+  width: 22px;
+  text-align: center;
+  padding: 0;
+}
+.red {
+  color: @up-red;
+}
+.green {
+  color: @down-green;
+}

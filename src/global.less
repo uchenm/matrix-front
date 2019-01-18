@@ -2,6 +2,8 @@
 @import '../node_modules/react-resizable/css/styles.css';
 
 html, body, #root {
+  overflow-x: hidden;
+  width: auto;
   height: auto !important;
 }
 #root {
@@ -24,12 +26,24 @@ a {
   text-decoration: none;
 }
 
+ul, li {
+  margin: 0;
+  padding: 0;
+}
+::selection {
+  color: inherit !important;
+  background: transparent !important;
+}
 /* react-gride */
 .grid-layout {
-  width: 100%;
+  margin-top: -10px;
+  margin-left: -10px;
+  margin-right: -10px;
+  width: calc(100% + (10px * -2));
+  // width: 100%;
 }
 .react-grid-layout {
-  background: #eee;
+  // background: #eee;
 }
 .react-grid-item {
   box-sizing: border-box;
@@ -39,7 +53,7 @@ a {
   border: 1px solid black;
 }
 .react-grid-item.resizing {
-  opacity: 0.9;
+  // opacity: 0.9;
 }
 .react-grid-item.static {
   background: #cce;

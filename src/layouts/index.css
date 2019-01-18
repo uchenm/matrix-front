@@ -1,9 +1,10 @@
 
 .basicLayout {
-  /* font-family: sans-serif; */
+  overflow: hidden;
   height: 100%;
 }
 .content {
-  padding: 0 10px 0;
+  overflow: hidden;
+  /* padding: 0 10px 0; */
   margin-top: 5px;
 }
