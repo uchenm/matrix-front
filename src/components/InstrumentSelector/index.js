@@ -2,7 +2,7 @@
  * @Author: XueYu 😊
  * @Date: 2019-01-11 18:09:12
  * @Last Modified by: XueYu 😊
- * @Last Modified time: 2019-01-17 18:08:28
+ * @Last Modified time: 2019-01-18 14:08:59
  */
 import React, {PureComponent} from 'react'
 import { Tabs } from 'antd'
@@ -75,7 +75,7 @@ class InstrumentSelector extends PureComponent {
   }
   render(){
     return (
-      <div className={styles.instrumentSelector}>
+      <div className={`${styles.instrumentSelector} tradeTopTabs`}>
         <Tabs onChange={callback} type='card' tabBarStyle={tabBarStyle} tabPosition='top'>
           {
             this.state.instrumentData.map(item => (

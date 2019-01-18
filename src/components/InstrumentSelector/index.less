@@ -2,7 +2,7 @@
  * @Author: XueYu 😊
  * @Date: 2019-01-11 18:11:23
  * @Last Modified by: XueYu 😊
- * @Last Modified time: 2019-01-17 18:17:29
+ * @Last Modified time: 2019-01-18 15:14:16
  */
 @import '../../global.color.less';
 
@@ -66,14 +66,14 @@
   color: @down-green;
 }
 /* antd */
-:global(.ant-tabs){
+:global(.tradeTopTabs .ant-tabs){
   box-shadow: 2px 2px 2px -1px black;
   outline: 1px solid #888;
 }
-:global(.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-nav-container) {
+:global(.tradeTopTabs .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-nav-container) {
   height: 42px;
 }
-:global(.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab){
+:global(.tradeTopTabs .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab){
   border-radius: 0;
   position: relative;
   padding-top: 5px;
@@ -87,14 +87,17 @@
     left: 0;
   }
 }
-:global(.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active){
+:global(.tradeTopTabs .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active){
   color: #000;
   font-weight: bolder;
   &::before {
     background-color: #4ab0ce;
   }
 }
-:global(.ant-tabs-nav .ant-tabs-tab:hover) {
+:global(.tradeTopTabs .ant-tabs-nav .ant-tabs-tab:hover) {
   text-decoration: underline;
   color: #000;
+}
+:global(.tradeTopTabs .ant-tabs-nav-container){
+  border: none;
 }

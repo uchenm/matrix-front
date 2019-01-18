@@ -2,7 +2,7 @@
  * @Author: XueYu 😊
  * @Date: 2019-01-14 17:41:19
  * @Last Modified by: XueYu 😊
- * @Last Modified time: 2019-01-17 18:25:32
+ * @Last Modified time: 2019-01-18 17:13:23
  */
 import React, { PureComponent } from 'react'
 import { Responsive, WidthProvider } from 'react-grid-layout';
@@ -10,7 +10,9 @@ import Card from '../Card'
 import Order from './Order'
 import RecentTrade from './RecentTrade'
 import DepthChart from '../DepthChart'
-// import styles from './index.less'
+import BasicOrdersAndPositions from './BasicOrdersAndPositions'
+import BasicOrdersHeader from './BasicOrdersAndPositions/Header'
+import styles from './index.less'
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 /* const advanced = {
@@ -123,7 +125,7 @@ const m_basic = {
     {"w":4,"h":3,"x":4,"y":0,"i":"tradingView","minW":2,"minH":1,"moved":false,"static":false},
     {"w":4,"h":1,"x":4,"y":3,"i":"depthChart","minW":2,"minH":1,"moved":false,"static":false},
     {"w":4,"h":4,"x":8,"y":0,"i":"recentTradeList","minW":2,"minH":1,"moved":false,"static":false},
-    {"w":12,"h":1,"x":0,"y":4,"i":"basicOrdersAndPositions","minW":2,"minH":1,"moved":false,"static":false}
+    {"w":12,"h":1,"x":0,"y":4,"i":"basicOrdersAndPositions","minW":7,"minH":1,"moved":false,"static":false}
   ],
 }
 const originalLayouts = getFromLS("layouts") || m_basic
@@ -151,7 +153,16 @@ function saveToLS(key, value) {
   }
 }
 
-const renderCardList = (isFullscreen, clickFullScreen, clickClose) => {
+const tabList = [
+  {key: 'positions', tab: '仓位'},
+  {key: 'close', tab: '已平仓位'},
+  {key: 'active', tab: '活动委托'},
+  {key: 'stops', tab: '止损委托'},
+  {key: 'fills', tab: '已成交'},
+  {key: 'order', tab: '委托历史'},
+]
+
+const renderCardList = (isFullscreen, clickFullScreen, clickClose, onTabChange, activeTabKey) => {
   return {
     orderBook: (
       <Card
@@ -166,7 +177,7 @@ const renderCardList = (isFullscreen, clickFullScreen, clickClose) => {
     tradingView: (
       <Card title='图表' extra={['close', 'fullscreen']} isFullscreen={isFullscreen}
         clickFullScreen={() => clickFullScreen('tradingView')} clickClose={() => clickClose('tradingView')}>
-        图表
+        tradingView
       </Card>
     ),
     depthChart: (
@@ -182,9 +193,13 @@ const renderCardList = (isFullscreen, clickFullScreen, clickClose) => {
       </Card>
     ),
     basicOrdersAndPositions: (
-      <Card title='仓位' extra={['close', 'fullscreen']} isFullscreen={isFullscreen}
+      <Card
+        id='basicOrdersAndPositions' tabList={tabList}
+        onTabChange={onTabChange}
+        defaultActiveTabKey='positions'
+        extra={['close', 'fullscreen']} isFullscreen={isFullscreen}
         clickFullScreen={() => clickFullScreen('basicOrdersAndPositions')} clickClose={() => clickClose('basicOrdersAndPositions')}>
-        仓位
+        <BasicOrdersAndPositions activeTabKey={activeTabKey}/>
       </Card>
     )
   }
@@ -196,7 +211,8 @@ class TradeGridLayout extends PureComponent {
     layouts: JSON.parse(JSON.stringify(originalLayouts)),
     isFullscreen: false,
     fullscreenCard: '',
-    closeList: []
+    closeList: [],
+    activeTabKey: 'positions',
   }
 
   onLayoutChange = (layout, layouts) => {
@@ -220,9 +236,8 @@ class TradeGridLayout extends PureComponent {
       })
     }
   }
-
   renderGridItems = () => {
-    const { isFullscreen, closeList } = this.state
+    const { isFullscreen, closeList, activeTabKey } = this.state
     let gridItems = [
       {
         key: 'orderBook',
@@ -260,12 +275,16 @@ class TradeGridLayout extends PureComponent {
         key: 'basicOrdersAndPositions',
         content: (
           <div key="basicOrdersAndPositions" >
-            {renderCardList(isFullscreen, this.clickFullScreen, this.clickClose)['basicOrdersAndPositions']}
+            {renderCardList(isFullscreen, this.clickFullScreen, this.clickClose, this.onTabChange, activeTabKey)['basicOrdersAndPositions']}
           </div>
         )
       },
     ]
     return gridItems.filter(item => !closeList.includes(item.key)).map(item => item.content)
+  }
+  onTabChange = (key) => {
+    console.log('onTabChange key',key)
+    this.setState({ activeTabKey: key })
   }
 
   render(){
@@ -276,7 +295,10 @@ class TradeGridLayout extends PureComponent {
           breakpoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
           cols={{lg: 12, md: 12, sm: 6, xs: 4, xxs: 2}}
           layouts={this.state.layouts}
-          draggableCancel='.ant-card-body'
+          draggableCancel='.noDrag'
+          measureBeforeMount={true}
+          // useCSSTransforms={false}
+          // containerPadding={[10,0]}
           onLayoutChange={(layout, layouts) =>
             this.onLayoutChange(layout, layouts)
           }>

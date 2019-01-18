@@ -2,7 +2,7 @@
  * @Author: XueYu 😊
  * @Date: 2019-01-15 11:03:08
  * @Last Modified by: XueYu 😊
- * @Last Modified time: 2019-01-16 19:32:58
+ * @Last Modified time: 2019-01-18 15:00:28
  */
 import React, { PureComponent } from 'react'
 import { Card, Icon, Popover, InputNumber, Tooltip, Radio, Checkbox } from 'antd'
@@ -92,12 +92,14 @@ function renderExtraWigets (extra, clickFullScreen, isFullscreen, clickClose) {
   return extraWigets
 }
 
-const CardWraper = ({ children, title, extra, isFullscreen, clickFullScreen=()=>{}, clickClose=()=>{} }) => {
+const CardWraper = ({ children, extra, isFullscreen, clickFullScreen=()=>{}, clickClose=()=>{}, ...extraProps }) => {
   const extraWigets = renderExtraWigets(extra, clickFullScreen, isFullscreen, clickClose)
 
   return (
-    <Card title={title} extra={extraWigets}>
-      {children}
+    <Card extra={extraWigets} {...extraProps}>
+      <div className={`${styles.cardBodyWrapper} noDrag`}>
+        {children}
+      </div>
     </Card>
   )
 }
