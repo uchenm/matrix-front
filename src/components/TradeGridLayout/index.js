@@ -2,7 +2,7 @@
  * @Author: XueYu 😊
  * @Date: 2019-01-14 17:41:19
  * @Last Modified by: XueYu 😊
- * @Last Modified time: 2019-01-18 17:13:23
+ * @Last Modified time: 2019-01-21 19:06:00
  */
 import React, { PureComponent } from 'react'
 import { Responsive, WidthProvider } from 'react-grid-layout';
@@ -11,114 +11,17 @@ import Order from './Order'
 import RecentTrade from './RecentTrade'
 import DepthChart from '../DepthChart'
 import BasicOrdersAndPositions from './BasicOrdersAndPositions'
-import BasicOrdersHeader from './BasicOrdersAndPositions/Header'
-import styles from './index.less'
+import TradingView from './TradingView'
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
-/* const advanced = {
-  "lg":[
-    {"w":5,"h":12,"x":0,"y":0,"i":"orderBook","minW":2,"moved":false,"static":false},
-    {"w":3,"h":6,"x":5,"y":8,"i":"depthChart","moved":false,"static":false},
-    {"w":4,"h":8,"x":5,"y":0,"i":"tradingView","moved":false,"static":false},
-    {"w":3,"h":9,"x":0,"y":12,"i":"recentTradeList","moved":false,"static":false},
-    {"w":9,"h":6,"x":0,"y":21,"i":"openOrders","moved":false,"static":false},
-    {"w":9,"h":5,"x":0,"y":27,"i":"positionsList","moved":false,"static":false},
-    {"w":3,"h":5,"x":8,"y":8,"i":"marginDisplay","moved":false,"static":false},
-    {"w":12,"h":5,"x":0,"y":32,"i":"instrumentsList","moved":false,"static":false}
-  ],
-  "md":[
-    {"w":4,"h":6,"x":0,"y":0,"i":"orderBook","minW":2,"moved":false,"static":false},
-    {"w":5,"h":4,"x":3,"y":23,"i":"depthChart","moved":false,"static":false},
-    {"w":8,"h":8,"x":0,"y":15,"i":"tradingView","moved":false,"static":false},
-    {"w":4,"h":6,"x":4,"y":0,"i":"recentTradeList","moved":false,"static":false},
-    {"w":8,"h":4,"x":0,"y":6,"i":"openOrders","moved":false,"static":false},
-    {"w":8,"h":5,"x":0,"y":10,"i":"positionsList","moved":false,"static":false},
-    {"w":3,"h":4,"x":0,"y":23,"i":"marginDisplay","moved":false,"static":false},
-    {"w":8,"h":5,"x":0,"y":27,"i":"instrumentsList","moved":false,"static":false}
-  ],
-  "sm":[
-    {"w":2,"h":6,"x":0,"y":0,"i":"orderBook","minW":2,"moved":false,"static":false},
-    {"w":4,"h":4,"x":0,"y":28,"i":"depthChart","moved":false,"static":false},
-    {"w":4,"h":8,"x":0,"y":20,"i":"tradingView","moved":false,"static":false},
-    {"w":2,"h":6,"x":2,"y":0,"i":"recentTradeList","moved":false,"static":false},
-    {"w":4,"h":4,"x":0,"y":6,"i":"openOrders","moved":false,"static":false},
-    {"w":4,"h":5,"x":0,"y":10,"i":"positionsList","moved":false,"static":false},
-    {"w":4,"h":5,"x":0,"y":15,"i":"marginDisplay","moved":false,"static":false},
-    {"w":4,"h":5,"x":0,"y":32,"i":"instrumentsList","moved":false,"static":false}
-  ],
-  "xs":[
-    {"w":2,"h":8,"x":0,"y":0,"i":"orderControls","moved":false,"static":false},
-    {"w":2,"h":6,"x":0,"y":8,"i":"orderBook","moved":false,"static":false},
-    {"w":2,"h":5,"x":0,"y":14,"i":"recentTradeList","moved":false,"static":false},
-    {"w":2,"h":4,"x":0,"y":19,"i":"openOrders","moved":false,"static":false},
-    {"w":2,"h":5,"x":0,"y":23,"i":"positionsList","moved":false,"static":false},
-    {"w":2,"h":5,"x":0,"y":28,"i":"marginDisplay","moved":false,"static":false},
-    {"w":2,"h":8,"x":0,"y":33,"i":"tradingView","moved":false,"static":false},
-    {"w":2,"h":4,"x":0,"y":41,"i":"depthChart","moved":false,"static":false},
-    {"w":2,"h":5,"x":0,"y":45,"i":"instrumentsList","moved":false,"static":false},
-    {"w":2,"h":8,"x":0,"y":50,"i":"chatWidget","moved":false,"static":false}
-  ],
-  "xxs":[
-    {"w":2,"h":8,"x":0,"y":0,"i":"orderControls","moved":false,"static":false},
-    {"w":2,"h":6,"x":0,"y":8,"i":"orderBook","moved":false,"static":false},
-    {"w":2,"h":5,"x":0,"y":14,"i":"recentTradeList","moved":false,"static":false},
-    {"w":2,"h":4,"x":0,"y":19,"i":"openOrders","moved":false,"static":false},
-    {"w":2,"h":5,"x":0,"y":23,"i":"positionsList","moved":false,"static":false},
-    {"w":2,"h":5,"x":0,"y":28,"i":"marginDisplay","moved":false,"static":false},
-    {"w":2,"h":5,"x":0,"y":33,"i":"instrumentsList","moved":false,"static":false},
-    {"w":2,"h":8,"x":0,"y":38,"i":"tradingView","moved":false,"static":false},
-    {"w":2,"h":4,"x":0,"y":46,"i":"depthChart","moved":false,"static":false},
-    {"w":2,"h":8,"x":0,"y":50,"i":"chatWidget","moved":false,"static":false}
-  ]
-}
-const basic = {
-  "lg":[
-    {"w":4,"h":12,"x":0,"y":0,"i":"orderBook","minW":2,"moved":false,"static":false},
-    {"w":5,"h":4,"x":4,"y":8,"i":"depthChart","moved":false,"static":false},
-    {"w":5,"h":8,"x":4,"y":0,"i":"tradingView","moved":false,"static":false},
-    {"w":3,"h":12,"x":9,"y":0,"i":"recentTradeList","moved":false,"static":false},
-    {"w":12,"h":5,"x":0,"y":12,"i":"basicOrdersAndPositions","moved":false,"static":false}
-  ],
-  "md":[
-    {"w":4,"h":6,"x":0,"y":0,"i":"orderBook","minW":2,"moved":false,"static":false},
-    {"w":4,"h":6,"x":4,"y":0,"i":"recentTradeList","moved":false,"static":false},
-    {"w":8,"h":5,"x":0,"y":6,"i":"basicOrdersAndPositions","moved":false,"static":false},
-    {"w":8,"h":8,"x":0,"y":11,"i":"tradingView","moved":false,"static":false},
-    {"w":8,"h":4,"x":0,"y":19,"i":"depthChart","moved":false,"static":false}
-  ],
-  "sm":[
-    {"w":2,"h":6,"x":0,"y":0,"i":"orderBook","minW":2,"moved":false,"static":false},
-    {"w":2,"h":6,"x":2,"y":0,"i":"recentTradeList","moved":false,"static":false},
-    {"w":4,"h":5,"x":0,"y":6,"i":"basicOrdersAndPositions","moved":false,"static":false},
-    {"w":4,"h":8,"x":0,"y":11,"i":"tradingView","moved":false,"static":false},
-    {"w":4,"h":4,"x":0,"y":19,"i":"depthChart","moved":false,"static":false}
-  ],
-  "xs":[
-    {"w":2,"h":8,"x":0,"y":0,"i":"orderControls","moved":false,"static":false},
-    {"w":2,"h":6,"x":0,"y":8,"i":"orderBook","moved":false,"static":false},
-    {"w":2,"h":5,"x":0,"y":14,"i":"recentTradeList","moved":false,"static":false},
-    {"w":2,"h":5,"x":0,"y":19,"i":"basicOrdersAndPositions","moved":false,"static":false},
-    {"w":2,"h":8,"x":0,"y":24,"i":"chatWidget","moved":false,"static":false},
-    {"w":2,"h":8,"x":0,"y":32,"i":"tradingView","moved":false,"static":false},
-    {"w":2,"h":4,"x":0,"y":40,"i":"depthChart","moved":false,"static":false}
-  ],
-  "xxs":[
-    {"w":2,"h":8,"x":0,"y":0,"i":"orderControls","moved":false,"static":false},
-    {"w":2,"h":6,"x":0,"y":8,"i":"orderBook","moved":false,"static":false},
-    {"w":2,"h":5,"x":0,"y":14,"i":"recentTradeList","moved":false,"static":false},
-    {"w":2,"h":5,"x":0,"y":19,"i":"basicOrdersAndPositions","moved":false,"static":false},
-    {"w":2,"h":8,"x":0,"y":24,"i":"chatWidget","moved":false,"static":false},
-    {"w":2,"h":8,"x":0,"y":32,"i":"tradingView","moved":false,"static":false},
-    {"w":2,"h":4,"x":0,"y":40,"i":"depthChart","moved":false,"static":false}
-  ]
-} */
+/* 基础布局 */
 const m_basic = {
   "lg": [
-    {"w":2,"h":1,"x":0,"y":0,"i":"orderBook","minW":2,"minH":1,"moved":false,"static":false},
-    {"w":2,"h":1,"x":2,"y":0,"i":"tradingView","minW":2,"minH":1,"moved":false,"static":false},
-    {"w":2,"h":1,"x":4,"y":0,"i":"depthChart","minW":2,"minH":1,"moved":false,"static":false},
-    {"w":2,"h":1,"x":6,"y":0,"i":"recentTradeList","minW":2,"minH":1,"moved":false,"static":false},
-    {"w":2,"h":1,"x":8,"y":0,"i":"basicOrdersAndPositions","minW":2,"minH":1,"moved":false,"static":false}
+    {"w":3,"h":4,"x":0,"y":0,"i":"orderBook","moved":false,"static":false},
+    {"w":6,"h":3,"x":3,"y":0,"i":"tradingView","moved":false,"static":false},
+    {"w":6,"h":1,"x":3,"y":3,"i":"depthChart","minW":2,"minH":1,"moved":false,"static":false},
+    {"w":3,"h":4,"x":9,"y":0,"i":"recentTradeList","minW":2,"minH":1,"moved":false,"static":false},
+    {"w":12,"h":1,"x":0,"y":4,"i":"basicOrdersAndPositions","minW":2,"minH":1,"moved":false,"static":false}
   ],
   "md":[
     {"w":4,"h":4,"x":0,"y":0,"i":"orderBook","minW":4,"minH":1,"moved":false,"static":false},
@@ -129,7 +32,7 @@ const m_basic = {
   ],
 }
 const originalLayouts = getFromLS("layouts") || m_basic
-
+/* 取本地布局 */
 function getFromLS(key) {
   let ls = {};
   if (global.localStorage) {
@@ -141,7 +44,7 @@ function getFromLS(key) {
   }
   return ls[key];
 }
-
+/* 存布局到本地 */
 function saveToLS(key, value) {
   if (global.localStorage) {
     global.localStorage.setItem(
@@ -152,7 +55,7 @@ function saveToLS(key, value) {
     );
   }
 }
-
+/* 仓位标签配置 */
 const tabList = [
   {key: 'positions', tab: '仓位'},
   {key: 'close', tab: '已平仓位'},
@@ -162,63 +65,70 @@ const tabList = [
   {key: 'order', tab: '委托历史'},
 ]
 
-const renderCardList = (isFullscreen, clickFullScreen, clickClose, onTabChange, activeTabKey) => {
-  return {
-    orderBook: (
-      <Card
-        title='委托交易'
-        isFullscreen={isFullscreen}
-        extra={['setting', 'close', 'fullscreen']}
-        clickFullScreen={() => clickFullScreen('orderBook')}
-        clickClose={() => clickClose('orderBook')}>
-        <Order/>
-      </Card>
-    ),
-    tradingView: (
-      <Card title='图表' extra={['close', 'fullscreen']} isFullscreen={isFullscreen}
-        clickFullScreen={() => clickFullScreen('tradingView')} clickClose={() => clickClose('tradingView')}>
-        tradingView
-      </Card>
-    ),
-    depthChart: (
-      <Card title='深度图' extra={['close', 'fullscreen']} isFullscreen={isFullscreen}
-        clickFullScreen={() => clickFullScreen('depthChart')} clickClose={() => clickClose('depthChart')}>
-        <DepthChart/>
-      </Card>
-    ),
-    recentTradeList: (
-      <Card title='近期交易' extra={['close', 'fullscreen']} isFullscreen={isFullscreen}
-        clickFullScreen={() => clickFullScreen('recentTradeList')} clickClose={() => clickClose('recentTradeList')}>
-        <RecentTrade/>
-      </Card>
-    ),
-    basicOrdersAndPositions: (
-      <Card
-        id='basicOrdersAndPositions' tabList={tabList}
-        onTabChange={onTabChange}
-        defaultActiveTabKey='positions'
-        extra={['close', 'fullscreen']} isFullscreen={isFullscreen}
-        clickFullScreen={() => clickFullScreen('basicOrdersAndPositions')} clickClose={() => clickClose('basicOrdersAndPositions')}>
-        <BasicOrdersAndPositions activeTabKey={activeTabKey}/>
-      </Card>
-    )
-  }
-}
-
-
 class TradeGridLayout extends PureComponent {
   state = {
     layouts: JSON.parse(JSON.stringify(originalLayouts)),
     isFullscreen: false,
     fullscreenCard: '',
     closeList: [],
+    showList: ['orderBook','tradingView','depthChart','recentTradeList','basicOrdersAndPositions',],
     activeTabKey: 'positions',
+    toolbox: { lg: [] },
   }
-
+  /* 卡片列表配置 */
+  CARD_LIST_CONFIG = {
+    orderBook: {
+      key: 'orderBook',
+      title: '委托交易',
+      extra: ['setting', 'close', 'fullscreen'],
+      children: <Order/>
+    },
+    tradingView: {
+      key: 'tradingView',
+      title: '图表',
+      extra: ['close', 'fullscreen'],
+      children: <TradingView/>
+    },
+    depthChart: {
+      key: 'depthChart',
+      title: '深度图',
+      extra: ['close', 'fullscreen'],
+      children: <DepthChart/>
+    },
+    recentTradeList: {
+      key: 'recentTradeList',
+      title: '近期交易',
+      extra: ['close', 'fullscreen'],
+      children: <RecentTrade/>
+    },
+    basicOrdersAndPositions: {
+      key: 'basicOrdersAndPositions',
+      extra: ['close', 'fullscreen'],
+      children: <BasicOrdersAndPositions activeTabKey={this.state.activeTabKey}/>,
+      tabList,
+      defaultActiveTabKey: 'positions',
+      onTabChange: this.onTabChange,
+      id: 'basicOrdersAndPositions',
+    },
+  }
+  /* 渲染卡片 */
+  renderCardList = (key) => {
+    const { isFullscreen } = this.state
+    const {children, ...props} = this.CARD_LIST_CONFIG[key]
+    return (
+      <Card {...props} isFullscreen={isFullscreen}
+        clickFullScreen={() => this.clickFullScreen(key)} clickClose={() => this.clickClose(key)}>
+        {children}
+      </Card>
+    )
+  }
+  /* 布局变化回调 */
   onLayoutChange = (layout, layouts) => {
+    console.log('onLayoutChange!', layouts)
     saveToLS("layouts", layouts);
     this.setState({ layouts });
   }
+  /* 点击全屏 */
   clickFullScreen = ItemName => {
     const { isFullscreen } = this.state
     this.setState({
@@ -226,69 +136,45 @@ class TradeGridLayout extends PureComponent {
       fullscreenCard: ItemName
     })
   }
+  /* 点击关闭 */
   clickClose = ItemName => {
-    const { closeList } = this.state
-    let currentList = Array.from(closeList)
-    if (ItemName && !currentList.includes(ItemName)) {
-      currentList.push(ItemName)
+    console.log('clickClose ItemName',ItemName)
+    const { closeList, showList } = this.state
+    let currentShow = Array.from(showList)
+    let currentClose = Array.from(closeList)
+    const i = currentShow.indexOf(ItemName)
+    if (i !== -1) {
+      currentShow.splice(i, 1)
+      currentClose.push(ItemName)
       this.setState({
-        closeList: currentList
+        closeList: currentClose,
+        showList: currentShow
       })
     }
   }
-  renderGridItems = () => {
-    const { isFullscreen, closeList, activeTabKey } = this.state
-    let gridItems = [
-      {
-        key: 'orderBook',
-        content: (
-          <div key="orderBook" >
-            {renderCardList(isFullscreen, this.clickFullScreen, this.clickClose)['orderBook']}
-          </div>
-        )
-      },
-      {
-        key: 'tradingView',
-        content: (
-          <div key="tradingView" >
-          {renderCardList(isFullscreen, this.clickFullScreen, this.clickClose)['tradingView']}
-        </div>
-        )
-      },
-      {
-        key: 'depthChart',
-        content: (
-          <div key="depthChart" >
-          {renderCardList(isFullscreen, this.clickFullScreen, this.clickClose)['depthChart']}
-        </div>
-        )
-      },
-      {
-        key: 'recentTradeList',
-        content: (
-          <div key="recentTradeList" >
-            {renderCardList(isFullscreen, this.clickFullScreen, this.clickClose)['recentTradeList']}
-          </div>
-        )
-      },
-      {
-        key: 'basicOrdersAndPositions',
-        content: (
-          <div key="basicOrdersAndPositions" >
-            {renderCardList(isFullscreen, this.clickFullScreen, this.clickClose, this.onTabChange, activeTabKey)['basicOrdersAndPositions']}
-          </div>
-        )
-      },
-    ]
-    return gridItems.filter(item => !closeList.includes(item.key)).map(item => item.content)
-  }
-  onTabChange = (key) => {
+  /* 仓位标签切换 */
+  onTabChange = key => {
     console.log('onTabChange key',key)
     this.setState({ activeTabKey: key })
   }
+  /* 响应式布局变化 */
+  onBreakpointChange = breakpoint => {
+    console.log('breakpoint',breakpoint)
+    this.setState(prevState => ({
+      currentBreakpoint: breakpoint,
+      toolbox: {
+        ...prevState.toolbox,
+        [breakpoint]:
+          prevState.toolbox[breakpoint] ||
+          prevState.toolbox[prevState.currentBreakpoint] ||
+          []
+      }
+    }));
+  }
 
   render(){
-    const { isFullscreen, fullscreenCard } = this.state
+    const { isFullscreen, fullscreenCard, showList } = this.state
+    console.log('showList',showList)
     if (!isFullscreen) {
       return (
         <ResponsiveGridLayout
@@ -297,19 +183,20 @@ class TradeGridLayout extends PureComponent {
           layouts={this.state.layouts}
           draggableCancel='.noDrag'
           measureBeforeMount={true}
+          onBreakpointChange={this.onBreakpointChange}
           // useCSSTransforms={false}
           // containerPadding={[10,0]}
           onLayoutChange={(layout, layouts) =>
             this.onLayoutChange(layout, layouts)
           }>
-          { this.renderGridItems() }
-
+          {
+            showList.map(item => <div key={item}>{this.renderCardList(item)}</div>)
+          }
         </ResponsiveGridLayout>
       )
     } else if (isFullscreen) {
-      return (renderCardList(isFullscreen, this.clickFullScreen)[fullscreenCard])
+      return (this.renderCardList(fullscreenCard))
     }
-
   }
 }
 
