@@ -1,3 +1,4 @@
+@import '../../global.color.less';
 
 .tickerBarSection {
   padding: 0 5px 0 12px;
@@ -79,7 +80,7 @@
   box-shadow: 0px 0px 2px 0px black;
   background-color: #2e3f4d;
   color: #fff;
-  line-height: 40px;
+  // line-height: 40px;
 }
 .logo {
   width: 260px;
@@ -87,7 +88,7 @@
 .line {
   background: linear-gradient(rgba(170, 170, 170, 0), rgba(170, 170, 170, 0.8), rgba(145, 145, 145, 0));
   height: 100%;
-  margin-right: 6px;
+  // margin-right: 6px;
   position: relative;
   width: 1px;
 }
@@ -98,4 +99,95 @@
   padding: 0 10px;
   flex: 25 0 auto;
   line-height: 1;
+}
+.headerWidget {
+  height: 100%;
+}
+.widgetWrap {
+  cursor: pointer;
+  padding:  0 8px;
+}
+.headerWidgetTitle {
+  text-align: center;
+  height: 28px;
+  line-height: 28px;
+  background-color: #eee;
+  border-bottom: 1px solid #999;
+}
+.notification {
+  width: 500px;
+  height: 500px;
+  overflow-y: auto;
+  border-top: 3px solid @light-blue;
+  background-color: @blue080;
+  background-image: @bodyBg;
+
+  .content {
+    padding: 10px 10px 0;
+    .item {
+      border: 1px solid #999;
+      background-color: #fff;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+  }
+}
+.langWrap {
+  width: 24px;
+  height: 18px;
+}
+.lang {
+  width: 160px;
+  border-top: 3px solid @light-blue;
+  .content {
+    .item {
+      &:hover {
+        background-color: @blue-2;
+      }
+      height: 24px;
+      padding: 0 10px;
+      .countryIcon {
+        width: 22px;
+      }
+    }
+  }
+}
+
+.accountBtn {
+  margin: 5px 0 10px;
+  border: 1px solid rgba(0, 0, 0, .25);
+  height: 28px;
+  line-height: 28px;
+  &:hover {
+    color: #f0f0f0;
+    box-shadow: inset 0 1px 5px rgba(0,0,0,0.08);
+    background-color: #3196b4;
+    border-color: #26758c;
+  }
+}
+.accountBtnOrange {
+  composes: accountBtn;
+  &:hover {
+    background-color: #e24b22;
+    border-color: #b93b18;
+  }
+}
+.account {
+  width: 230px;
+  .content {
+    padding: 10px;
+    .btnGroup {
+      .txt {
+        height: 100%;
+        border-left: 1px solid #fff;
+      }
+    }
+  }
+}
+/* antd */
+:global(.headerNotification .ant-popover-inner-content){
+  padding: 0;
+}
+:global(.headerLang .ant-popover-inner-content){
+  padding: 0;
 }

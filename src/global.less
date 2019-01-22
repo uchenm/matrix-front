@@ -1,5 +1,6 @@
 @import '../node_modules/react-grid-layout/css/styles.css';
 @import '../node_modules/react-resizable/css/styles.css';
+@import './global.color.less';
 
 html, body, #root {
   overflow-x: hidden;
@@ -18,8 +19,8 @@ body {
   min-height: 100vh;
   display: flex;
   margin: 0;
-  background-color: rgba(169,188,204,0.8);
-  background-image: radial-gradient(farthest-side ellipse at 10% 0, rgba(169,188,204,0.8), rgba(185,201,214,0.79), rgba(217,226,233,0.85)),url("/src/assets/bgnoise_lg_dark.png")
+  background-color: @blue080;
+  background-image: @bodyBg;
 }
 a {
   color: inherit!important;
@@ -92,8 +93,10 @@ ul, li {
   flex-direction: column;
 }
 .flex-justify-between {
-  display: flex;
   justify-content: space-between;
+}
+.flex-justify-end {
+  justify-content: flex-end;
 }
 .align-items-center {
   align-items: center;
@@ -121,6 +124,9 @@ ul, li {
 .f-16 {
   font-size: 16px;
 }
+.f-18 {
+  font-size: 18px;
+}
 /* color */
 .c-fff {
   color: #fff;
@@ -130,6 +136,19 @@ ul, li {
 }
 .c-red {
   color: #d16547;
+}
+.c-darkblue {
+  color: @darkblue;
+}
+.c-000-7 {
+  color: @black070;
+}
+/* bg */
+.bg-light-blue {
+  background-color: @light-blue;
+}
+.bg-orange {
+  background-color: @orange;
 }
 /* user */
 .cursor-p {
