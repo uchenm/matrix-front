@@ -204,12 +204,12 @@ class Header extends PureComponent {
           </div>
           <div className={`flex-1 flex flex-justify-end align-items-center f-12 ${styles.headerWidget}`}>
             <span className={styles.line}></span>
-            <div className={`${styles.total} ${styles.widgetWrap}`}>
-              <div className='flex-justify-between flex flex-1'>
+            <div className={`${styles.total} flex-col justify-center cursor-p`}>
+              <div className='flex-justify-between align-items-center flex flex-1'>
                 <span>总:</span>
                 <span>0.0000 XBT</span>
               </div>
-              <div className='flex-justify-between flex flex-1'>
+              <div className='flex-justify-between align-items-center flex flex-1'>
                 <span>可用:</span>
                 <span>0.0000 XBT</span>
               </div>
@@ -224,18 +224,18 @@ class Header extends PureComponent {
             <span className={styles.line}></span>
             <Popover content={<Lang/>} placement='bottomRight'
               trigger='click' overlayClassName='headerLang'>
-              <div className={styles.widgetWrap}>
+              <div className={`${styles.widgetWrap} cursor-p`}>
                 <img className={styles.langWrap} src="/image/zh-CN.svg" alt=""/>
               </div>
             </Popover>
             <span className={styles.line}></span>
-            <div className={styles.widgetWrap}>
+            <div className={`${styles.widgetWrap} cursor-p`}>
               <Link to='/trade/XBTUSD'><Icon type="question-circle" /></Link>
             </div>
             <span className={styles.line}></span>
             <Popover content={<Account/>} placement='bottomRight'
               trigger='click' overlayClassName='headerLang'>
-              <div className={`${styles.widgetWrap} f-18`}>
+              <div className={`${styles.widgetWrap} f-18 cursor-p`}>
                 zhaoxueyu@dae.org
                 <Icon type="caret-down" />
               </div>

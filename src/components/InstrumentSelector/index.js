@@ -2,22 +2,75 @@
  * @Author: XueYu 😊
  * @Date: 2019-01-11 18:09:12
  * @Last Modified by: XueYu 😊
- * @Last Modified time: 2019-01-18 14:08:59
+ * @Last Modified time: 2019-01-23 21:02:39
  */
 import React, {PureComponent} from 'react'
-import { Tabs } from 'antd'
+import { Tabs, Popover, Icon, Checkbox } from 'antd'
+import { connect } from 'dva'
+import { BASIC_TOOL } from '../../common/layout'
 import Head from './Head'
 import Content from './Content'
 import styles from './index.less'
 
 const TabPane = Tabs.TabPane;
+const CheckboxGroup = Checkbox.Group;
+
+const OPTIONS = [
+  { value: 'orderBook', label: '委托列表' },
+  { value: 'tradingView', label: '价格图表' },
+  { value: 'depthChart', label: '深度图' },
+  { value: 'recentTradeList', label: '近期交易' },
+  { value: 'basicOrdersAndPositions', label: '仓位和未结委托' },
+]
 
 function callback(key) {
-  console.log(key);
+  // console.log(key);
 }
 const tabBarStyle = {
   background: '#eee',
   margin: '0',
+}
+
+@connect(({ trade: {layouts, currentBreakpoint, closedCards} }) => ({
+  layouts, currentBreakpoint, closedCards
+}))
+class ToolBar extends PureComponent {
+  getValue = _ => {
+    const { closedCards, currentBreakpoint, layouts } = this.props
+    const closedItems = closedCards[currentBreakpoint].map(item => item.i)
+    const allItems = layouts[currentBreakpoint].map(item => item.i)
+    return allItems.filter(item => !closedItems.includes(item))
+  }
+  onChange = (e, key) => {
+    const state = e.target.checked
+    if (!state) {
+      this.props.dispatch({ type: 'trade/closeCard', payload: {key} })
+    } else {
+      this.props.dispatch({ type: 'trade/openCard', payload: {key} })
+    }
+  }
+  isChecked = key => {
+    const { closedCards, currentBreakpoint } = this.props
+    const closedItems = closedCards[currentBreakpoint].map(item => item.i)
+    return !closedItems.includes(key)
+  }
+
+  render(){
+    // const { layouts, currentBreakpoint } = this.props
+    const defaultValue = ['orderBook', 'tradingView', 'depthChart', 'recentTradeList', 'basicOrdersAndPositions']
+    return (
+      <div>
+        {
+          BASIC_TOOL.map(item => (
+            <Checkbox
+              onChange={(e, key) => this.onChange(e,item.key)}
+              key={item.key}
+              checked={this.isChecked(item.key)}>{item.name}</Checkbox>
+          ))
+        }
+      </div>
+    )
+  }
 }
 
 class InstrumentSelector extends PureComponent {
@@ -87,6 +140,14 @@ class InstrumentSelector extends PureComponent {
             ))
           }
         </Tabs>
+        <div className={styles.toolBar}>
+          <Popover content={<ToolBar/>} trigger='click' placement='bottomRight'>
+            <div>
+              定制
+              <Icon type="caret-down" />
+            </div>
+          </Popover>
+        </div>
       </div>
     )
   }

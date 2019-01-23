@@ -2,7 +2,7 @@
  * @Author: XueYu 😊
  * @Date: 2019-01-17 11:37:54
  * @Last Modified by: XueYu 😊
- * @Last Modified time: 2019-01-17 15:52:41
+ * @Last Modified time: 2019-01-23 14:57:56
  */
 import React, { PureComponent } from 'react'
 import Highcharts from 'highcharts'
@@ -18,7 +18,6 @@ class DepthChart extends PureComponent {
   }
 
   componentDidMount(){
-    console.log('size', this.props.size)
     Highcharts.setOptions({
       colors: ["#008c00", "#ee3523"],
       chart: {
