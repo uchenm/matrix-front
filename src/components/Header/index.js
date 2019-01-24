@@ -2,6 +2,8 @@
 import React, { PureComponent } from 'react'
 import { Icon, Popover } from 'antd'
 import Link from 'umi/link'
+import router from 'umi/router'
+import { delCookie } from '../../utils'
 import styles from './index.less'
 
 /* 通知 */
@@ -94,6 +96,11 @@ const Lang = () => (
   </div>
 )
 /* 账户 */
+function logout () {
+  delCookie('user')
+  // router.push('/user/login')
+  window.location.href = '/user/login'
+}
 const Account = () => (
   <div className={styles.account}>
     <div className={styles.headerWidgetTitle}>主要选项</div>
@@ -107,7 +114,7 @@ const Account = () => (
           <Icon type="setting" style={{color: '#fff', fontSize: '18px', margin: '0 15px'}}/>
           <span className={`flex-1 f-bolder t-center c-fff ${styles.txt}`}>网站设定</span>
         </div>
-        <div className={`${styles.accountBtnOrange} cursor-p bg-orange flex align-items-center`}>
+        <div onClick={logout} className={`${styles.accountBtnOrange} cursor-p bg-orange flex align-items-center`}>
           <Icon type="logout" style={{color: '#fff', fontSize: '18px', margin: '0 15px'}}/>
           <span className={`flex-1 f-bolder t-center c-fff ${styles.txt}`}>登出</span>
         </div>

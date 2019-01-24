@@ -2,26 +2,19 @@
  * @Author: XueYu 😊
  * @Date: 2019-01-11 18:09:12
  * @Last Modified by: XueYu 😊
- * @Last Modified time: 2019-01-23 21:02:39
+ * @Last Modified time: 2019-01-24 17:06:29
  */
 import React, {PureComponent} from 'react'
-import { Tabs, Popover, Icon, Checkbox } from 'antd'
+import { Tabs, Popover, Icon, Switch } from 'antd'
 import { connect } from 'dva'
-import { BASIC_TOOL } from '../../common/layout'
+
 import Head from './Head'
 import Content from './Content'
+import ToolSelectBar from './ToolSelectBar'
+import { getItem, setItem } from '../../utils'
 import styles from './index.less'
 
 const TabPane = Tabs.TabPane;
-const CheckboxGroup = Checkbox.Group;
-
-const OPTIONS = [
-  { value: 'orderBook', label: '委托列表' },
-  { value: 'tradingView', label: '价格图表' },
-  { value: 'depthChart', label: '深度图' },
-  { value: 'recentTradeList', label: '近期交易' },
-  { value: 'basicOrdersAndPositions', label: '仓位和未结委托' },
-]
 
 function callback(key) {
   // console.log(key);
@@ -31,48 +24,7 @@ const tabBarStyle = {
   margin: '0',
 }
 
-@connect(({ trade: {layouts, currentBreakpoint, closedCards} }) => ({
-  layouts, currentBreakpoint, closedCards
-}))
-class ToolBar extends PureComponent {
-  getValue = _ => {
-    const { closedCards, currentBreakpoint, layouts } = this.props
-    const closedItems = closedCards[currentBreakpoint].map(item => item.i)
-    const allItems = layouts[currentBreakpoint].map(item => item.i)
-    return allItems.filter(item => !closedItems.includes(item))
-  }
-  onChange = (e, key) => {
-    const state = e.target.checked
-    if (!state) {
-      this.props.dispatch({ type: 'trade/closeCard', payload: {key} })
-    } else {
-      this.props.dispatch({ type: 'trade/openCard', payload: {key} })
-    }
-  }
-  isChecked = key => {
-    const { closedCards, currentBreakpoint } = this.props
-    const closedItems = closedCards[currentBreakpoint].map(item => item.i)
-    return !closedItems.includes(key)
-  }
-
-  render(){
-    // const { layouts, currentBreakpoint } = this.props
-    const defaultValue = ['orderBook', 'tradingView', 'depthChart', 'recentTradeList', 'basicOrdersAndPositions']
-    return (
-      <div>
-        {
-          BASIC_TOOL.map(item => (
-            <Checkbox
-              onChange={(e, key) => this.onChange(e,item.key)}
-              key={item.key}
-              checked={this.isChecked(item.key)}>{item.name}</Checkbox>
-          ))
-        }
-      </div>
-    )
-  }
-}
-
+@connect(({ trade: {layoutType} }) => ({ layoutType }))
 class InstrumentSelector extends PureComponent {
   state = {
     instrumentData: [
@@ -126,7 +78,16 @@ class InstrumentSelector extends PureComponent {
       },
     ],
   }
+  /* Switch 切换 */
+  onChange = checked => {
+    this.props.dispatch({
+      type: 'trade/layoutTypeChange',
+      payload: { layoutType: checked ? 'high' : 'basic' }
+    })
+  }
+
   render(){
+    const { layoutType } = this.props
     return (
       <div className={`${styles.instrumentSelector} tradeTopTabs`}>
         <Tabs onChange={callback} type='card' tabBarStyle={tabBarStyle} tabPosition='top'>
@@ -140,13 +101,16 @@ class InstrumentSelector extends PureComponent {
             ))
           }
         </Tabs>
-        <div className={styles.toolBar}>
-          <Popover content={<ToolBar/>} trigger='click' placement='bottomRight'>
-            <div>
+        <div className={`${styles.toolBar} flex align-items-center`}>
+          <Popover content={<ToolSelectBar/>} trigger='click' placement='bottomRight'>
+            <span className={`cursor-p`}>
               定制
               <Icon type="caret-down" />
-            </div>
+            </span>
           </Popover>
+          <Icon type="border" style={{margin: '0 5px 0 10px'}}/>
+          <Switch size='small' onChange={this.onChange} checked={layoutType === 'high'}/>
+          <Icon type="table" style={{marginLeft: '5px'}}/>
         </div>
       </div>
     )

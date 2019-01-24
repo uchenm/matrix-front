@@ -2,7 +2,7 @@
  * @Author: XueYu 😊
  * @Date: 2019-01-14 17:41:19
  * @Last Modified by: XueYu 😊
- * @Last Modified time: 2019-01-23 16:14:02
+ * @Last Modified time: 2019-01-24 17:36:42
  */
 import React, { PureComponent } from 'react'
 import { connect } from 'dva'
@@ -13,6 +13,7 @@ import RecentTrade from './RecentTrade'
 import DepthChart from '../DepthChart'
 import BasicOrdersAndPositions from './BasicOrdersAndPositions'
 import TradingView from './TradingView'
+import MarginDisplay from './MarginDisplay'
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -71,6 +72,12 @@ class TradeGridLayout extends PureComponent {
       onTabChange: this.onTabChange,
       id: 'basicOrdersAndPositions',
     },
+    marginDisplay: {
+      key: 'marginDisplay',
+      title: '保证金',
+      extra: ['close'],
+      children: <MarginDisplay />
+    },
   }
   /* 渲染卡片 */
   renderCardList = (key) => {
@@ -124,7 +131,7 @@ class TradeGridLayout extends PureComponent {
       return (
         <ResponsiveGridLayout
           breakpoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
-          cols={{lg: 12, md: 12, sm: 6, xs: 4, xxs: 2}}
+          cols={{lg: 12, md: 12, sm: 12, xs: 12, xxs: 2}}
           layouts={layouts}
           draggableCancel='.noDrag'
           // measureBeforeMount={true}

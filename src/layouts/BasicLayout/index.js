@@ -1,6 +1,6 @@
-import Header from '../components/Header'
+import Header from '../../components/Header'
 import styles from './index.css';
-import Sider from '../components/Sider'
+import Sider from '../../components/Sider'
 
 function BasicLayout(props) {
   return (
